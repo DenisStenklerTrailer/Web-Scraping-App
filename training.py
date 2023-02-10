@@ -11,7 +11,6 @@ now = datetime.now()
 
 st.title("TEMPTERATURE CHART")
 
-
 def scrape(url):
     response = requests.get(url)
     source = response.text
@@ -37,7 +36,6 @@ if __name__ == "__main__":
     scraped = scrape(URL)
     extracted = extract(scraped)
     date_time = store(extracted)
-    
     pos_figure = px.line(x=[date[0] for date in date_time], y=[temp[1] for temp in date_time],
                          labels={"x": "Date", "y": "Temperature"})
     st.plotly_chart(pos_figure)
