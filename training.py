@@ -31,15 +31,33 @@ def store(temperature=None):
     connection.commit()
     return data
 
+def read_date():
+    cursor = connection.cursor()
+    cursor.execute("SELECT date from temperatures")
+    date = cursor.fetchall()
+    date = [item[0] for item in date]
+    return date
+
+def read_temp():
+    cursor = connection.cursor()
+    cursor.execute("SELECT temperature from temperatures")
+    temp = cursor.fetchall()
+    temp = [item[0] for item in temp]
+    return temp
+
 if __name__ == "__main__":
     scraped = scrape(URL)
     extracted = extract(scraped)
     print(extracted)
     date_time = store(extracted)
-    print(date_time)
 
-    pos_figure = px.line(x=[date[0] for date in date_time], y=[temp[1] for temp in date_time],
-                         labels={"x": "Date", "y": "Temperature"})
+    date = read_date()
+    temp = read_temp()
+    print(date)
+    print(temp)
+
+    pos_figure = px.line(x=date, y=temp, labels={"x": "Date", "y": "Temperature"})
+
     st.plotly_chart(pos_figure)
 
 
