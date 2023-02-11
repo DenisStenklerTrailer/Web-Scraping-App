@@ -15,7 +15,7 @@ rows = cursor.fetchall()
 print(rows)
 
 # Inserting new rows
-#new_row1 = [('Cats', 'Cat city', '10.02.2023'), ('Knives', 'Knives city', '11.02.2023')]
+new_row1 = [('Cats', 'Cat city', '10.02.2023'), ('Knives', 'Knives city', '11.02.2023')]
 
-#cursor.executemany("INSERT INTO events VALUES(?,?,?)", new_row1) # ? ? ? so trije podatki v tuplu, drugi parameter new_row1 pa je kar hočemo vpisat v db
-#connection.commit()
+cursor.executemany("INSERT INTO events VALUES(?,?,?)", new_row1) # ? ? ? so trije podatki v tuplu, drugi parameter new_row1 pa je kar hočemo vpisat v db
+connection.commit()
